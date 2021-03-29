@@ -4,10 +4,10 @@
 
 ## Development Notes
 
-* Every Rosalind node should have its own file in the format ```ACRN.py``` (Put inside algorithms folder) 
-  where ```ACRN``` is the acronym for the node in the tree view
+* Every Rosalind node should have its own file in the format ACRN.py (Put inside algorithms folder) where ACRN is the acronym 
+  for the node in the tree view
   
-* Name the main function in each node main_XXX, eg. main function in ```ACRN.py``` should be ```main_ACRN(...)```
+* Name the main function in each node main_XXX, eg. main function in ```ACRN.py``` shouldb e ```main_ACRN(...)```
 
 * Name testing function test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
   

@@ -13,4 +13,4 @@ def main_DNA(dna):
 
 
 if __name__ == '__main__':
-    print(main_DNA(read_input('../datasets/DNA_3.txt')))
+    print(main_DNA(read_input('../datasets/DNA_2.txt')))
