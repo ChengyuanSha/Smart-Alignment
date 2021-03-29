@@ -1,5 +1,7 @@
 ## Global Alignment with Scoring Matrix and Affine Gap Penalty (In development)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c6150e482d28425a8895843df1b2a640)](https://app.codacy.com/gh/ChengyuanSha/Smart-Alignment?utm_source=github.com&utm_medium=referral&utm_content=ChengyuanSha/Smart-Alignment&utm_campaign=Badge_Grade_Settings)
+
 ## Development Notes
 
 * Every Rosalind node should have its own file in the format ```ACRN.py``` (Put inside algorithms folder) 
