@@ -1,1 +1,1 @@
-"""This module contains testing files."""
+"""The module contains testing files for algorithms module."""

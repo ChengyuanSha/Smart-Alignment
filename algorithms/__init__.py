@@ -1,1 +1,1 @@
-"""This module contains algorithm implementations."""
+"""The module contains different algorithm implementations."""
