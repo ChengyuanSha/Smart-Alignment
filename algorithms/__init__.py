@@ -1,3 +1,1 @@
-'''
-This module contains algorithm implementations.
-'''
+'''This module contains algorithm implementations.'''

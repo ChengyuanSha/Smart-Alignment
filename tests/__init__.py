@@ -1,3 +1,1 @@
-'''
-This module contains testing files.
-'''
+'''This module contains testing files.'''
