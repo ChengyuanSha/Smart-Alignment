@@ -1,6 +1,7 @@
-## Global Alignment with Scoring Matrix and Affine Gap Penalty (In development)
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c6150e482d28425a8895843df1b2a640)](https://app.codacy.com/gh/ChengyuanSha/Smart-Alignment?utm_source=github.com&utm_medium=referral&utm_content=ChengyuanSha/Smart-Alignment&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/bff56bab2b5741ccade6610ce3e0df49)](https://www.codacy.com/gh/ChengyuanSha/Smart-Alignment/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ChengyuanSha/Smart-Alignment&amp;utm_campaign=Badge_Coverage)
+
+## Global Alignment with Scoring Matrix and Affine Gap Penalty (In development)
 
 ## Development Notes
 
@@ -10,6 +11,8 @@
 * Name the main function in each node main_XXX, eg. main function in ```ACRN.py``` shouldb e ```main_ACRN(...)```
 
 * Name testing function test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
+
+* Use ```os.path.join(script_dir, rel_path)``` in tests to read input files. eg. ```test_DNA.py```
   
 * multiple tests per function, first two positive, last one negative
 
