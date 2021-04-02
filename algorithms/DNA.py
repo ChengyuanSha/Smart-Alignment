@@ -4,8 +4,9 @@ def read_input(fname):
         return f.read()
 
 
-def main_DNA(dna):
+def main_DNA(fname):
     """Counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in dna."""
+    dna = read_input(fname)
     if len(dna) > 1000 or len(dna) <= 0:
         raise Exception('Input Error')
     dna_counts = map(dna.count, ['A', 'C', 'G', 'T'])

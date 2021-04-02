@@ -12,10 +12,22 @@
 
 * Name testing function test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
 
-* Use ```os.path.join(script_dir, rel_path)``` in tests to read input files. eg. ```test_DNA.py```
-  
+* Use following way to read input files. eg.
+```python
+import os
+script_dir = os.path.dirname(__file__) # absolute dir the script is in
+rel_path = "../datasets/DNA_1.txt"
+abs_file_path = os.path.join(script_dir, rel_path)
+```
+
 * multiple tests per function, first two positive, last one negative
 
 * unit test doc: https://docs.python.org/3/library/unittest.html
 
 * use of doc string: https://www.python.org/dev/peps/pep-0257/
+
+* Check coverage: https://coverage.readthedocs.io/en/coverage-5.5/
+
+```python
+coverage run -m unittest discover
+```
