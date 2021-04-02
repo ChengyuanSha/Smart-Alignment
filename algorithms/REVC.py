@@ -1,4 +1,5 @@
 def main_REVC(fname):
+    """Find complementing a strand of DNA."""
     with open(fname, 'r') as f:
         dna = ''.join(f.read().strip())
     if len(dna) <= 0 or len(dna) > 1000:
