@@ -28,7 +28,7 @@ class TestAlgo(unittest.TestCase):
         abs_file_path = os.path.join(script_dir, rel_path)
         with self.assertRaises(Exception) as context:
             dna = read_input(abs_file_path)
-            result = main_RNA(dna)
+            main_RNA(dna)
         self.assertTrue('Input Error' in str(context.exception))
 
 

@@ -28,7 +28,7 @@ class TestAlgo(unittest.TestCase):
         abs_file_path = os.path.join(script_dir, rel_path)
         with self.assertRaises(Exception) as context:
             dna1, dna2 = read_input(abs_file_path)
-            result = main_HAMM(dna1, dna2)
+            main_HAMM(dna1, dna2)
         self.assertTrue('Input Error' in str(context.exception))
 
 
