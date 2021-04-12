@@ -1,7 +1,11 @@
-def main_REVC(fname):
-    """Find complementing a strand of DNA."""
+def read_input(fname):
+    """Read txt file containing a DNA string."""
     with open(fname, 'r') as f:
-        dna = ''.join(f.read().strip())
+        return ''.join(f.read().strip())
+
+
+def main_REVC(dna):
+    """Find complementing a strand of DNA."""
     if len(dna) <= 0 or len(dna) > 1000:
         raise Exception('Input Error')
     sequence_dic = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
@@ -9,4 +13,5 @@ def main_REVC(fname):
 
 
 if __name__ == '__main__':
-    print(main_REVC('../datasets/REVC_2.txt'))  # pragma: no cover
+    dna = read_input('../datasets/REVC_2.txt')  # pragma: no cover
+    print(main_REVC(dna))  # pragma: no cover

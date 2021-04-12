@@ -9,8 +9,9 @@
   where ```ACRN``` is the acronym for the node in the tree view
   
 * Name the main function in each node main_XXX, eg. main function in ```ACRN.py``` should be ```main_ACRN(...)```
-
-* Ideally, main_ACRN(...) should only has **fname** (filename) as input (looks like it is in most cases)
+ the main function input is what it says on the rosalind site.
+  
+* read_input is for reading files
 
 * Name testing function test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
 

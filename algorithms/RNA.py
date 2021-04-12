@@ -1,7 +1,11 @@
-def main_RNA(fname):
-    """Transcribing DNA into RNA."""
+def read_input(fname):
+    """Read txt file containing A DNA string."""
     with open(fname, 'r') as f:
-        dna = ''.join(f.read().strip())
+        return ''.join(f.read().strip())
+
+
+def main_RNA(dna):
+    """Transcribing DNA into RNA."""
     valid_dna = 'ACGT'
     if not (all(i in valid_dna for i in dna)):  # not a valid DNA
         raise Exception('Input Error')
@@ -9,4 +13,5 @@ def main_RNA(fname):
 
 
 if __name__ == '__main__':
-    print(main_RNA('../datasets/RNA_3.txt'))  # pragma: no cover
+    dna = read_input('../datasets/RNA_1.txt')  # pragma: no cover
+    print(main_RNA(dna))  # pragma: no cover
