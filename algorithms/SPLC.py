@@ -1,4 +1,5 @@
-from algorithms.PROT import main_PROT, codons
+from RNA import main_RNA
+from PROT import main_PROT, codons
     
 def read_input(fname):
     '''
@@ -25,12 +26,12 @@ def read_fasta(fname):
     return seqs
     
 def main_SPLC(input):
-    rna = max(input, key = len)
-    intron = [s for s in input if s != rna]
-    
+    dna = max(input, key = len)
+    introns = [s for s in input if s != dna]
     for i in introns:
-        rna = rna.replace(i, "")
-        
+        dna = dna.replace(i, "")
+    
+    rna = main_RNA(dna)
     pep = main_PROT(rna)
     
     if pep:
@@ -38,7 +39,8 @@ def main_SPLC(input):
     else:
         raise Exception("No exons detected.")
     
-if __name__ == "__main__"
+if __name__ == "__main__":
     input = read_fasta("../datasets/SPLC_1.txt")
+    #print(input)
     print(main_SPLC(input))
     
