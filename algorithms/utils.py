@@ -32,5 +32,5 @@ def read_score_matrix(fname):
 
 
 def BLOSUM62():
-    '''Return a BLOSUM62 score matrix dataframe '''
+    '''Return a BLOSUM62 score matrix dataframe.'''
     return read_score_matrix('../datasets/BLOSUM62.txt')
