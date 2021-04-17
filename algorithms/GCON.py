@@ -2,7 +2,8 @@ from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 
 def main_GCON(s, t, BLOSUM62, gap):
-    """Global Alignment with Constant Gap Penalty.
+    """
+    Global Alignment with Constant Gap Penalty.
 
     Inputs: Two protein strings s and t in FASTA format.
     Return: The maximum alignment score between s and t using BLOSUM62 scoring matrix
