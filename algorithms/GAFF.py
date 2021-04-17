@@ -33,7 +33,7 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M, i, j):
     return max_score, s_aligned, t_aligned
 
 
-def main_GAFF(s, t, BLOSUM62, gap, gap_ext):
+def main_GAFF(s, t, scoring_matrix, gap, gap_ext):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty.
 
@@ -64,7 +64,7 @@ def main_GAFF(s, t, BLOSUM62, gap, gap_ext):
             U[i][j] = max(costY)
             trace_U[i][j] = costY.index(U[i][j])
 
-            costM = [M[i-1][j-1] + BLOSUM62.loc[s[i-1], t[j-1]],
+            costM = [M[i-1][j-1] + scoring_matrix.loc[s[i-1], t[j-1]],
                      L[i][j], U[i][j]]
             M[i][j] = max(costM)
             trace_M[i][j] = costM.index(M[i][j])
@@ -73,6 +73,6 @@ def main_GAFF(s, t, BLOSUM62, gap, gap_ext):
 
 
 if __name__ == '__main__':
-    s, t = read_fasta('../datasets/GAFF_2.txt')
-    alignment = main_GAFF(s, t, BLOSUM62(), -11, -1)
-    print('\n'.join(map(str, alignment)))
+    s, t = read_fasta('../datasets/GAFF_2.txt') # pragma: no cover
+    alignment = main_GAFF(s, t, BLOSUM62(), -11, -1) # pragma: no cover
+    print('\n'.join(map(str, alignment))) # pragma: no cover
