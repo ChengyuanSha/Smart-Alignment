@@ -3,7 +3,7 @@ import numpy as np
 
 
 def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M, i, j):
-    '''Traceback best aligned two sequence using table information.'''
+    """Traceback best aligned two sequence using table information."""
     s_aligned, t_aligned = s, t
     scores = [L[i][j], U[i][j], M[i][j]]
     max_score = max(scores)
@@ -26,20 +26,20 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M, i, j):
                 i -= 1
                 j -= 1
     # check the leading gaps
-    for remaining in range(i):
+    for _ in range(i):
         t_aligned = t_aligned[:0] + '-' + t_aligned[0:]
-    for remaining in range(j):
+    for _ in range(j):
         s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
     return max_score, s_aligned, t_aligned
 
 
 def main_GAFF(s, t, BLOSUM62, gap, gap_ext):
-    ''' Global Alignment with Scoring Matrix and Affine Gap Penalty
-    
-    Inputs: Two protein strings s and t in FASTA format
+    """Global Alignment with Scoring Matrix and Affine Gap Penalty.
+
+    Inputs: Two protein strings s and t in FASTA format.
     Returns: The maximum alignment score between s and t, followed by two augmented strings
-    s′ and t′ representing an optimal alignment of s and t
-    '''
+    s′ and t′ representing an optimal alignment of s and t.
+    """
     # initializations
     neg_infinity = -999999
     row, col = len(s) + 1, len(t) + 1
