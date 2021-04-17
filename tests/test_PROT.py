@@ -12,7 +12,22 @@ class TestAlgo(unittest.TestCase):
         input = read_input(abs_file_path)
         result = main_PROT(input)
         self.assertEqual(sample_answer, result)
+        
+    def test_PROT_2(self):
+        sample_answer = 'DTAESISRATRSANSISTIRSN'
+        rel_path = "../datasets/PROT_2.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        input = read_input(abs_file_path)
+        result = main_PROT(input)
+        self.assertEqual(sample_answer, result)
 
+    def test_PROT_3(self):
+        sample_answer = ''
+        rel_path = "../datasets/PROT_3.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        input = read_input(abs_file_path)
+        result = main_PROT(input)
+        self.assertEqual(sample_answer, result)
 
 if __name__ == '__main__':
     unittest.main() # pragma: no cover
