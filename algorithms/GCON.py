@@ -1,7 +1,7 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 
-def main_GCON(s, t, BLOSUM62, gap):
+def main_GCON(s, t, scoring_matrix, gap):
     """
     Global Alignment with Constant Gap Penalty.
 
@@ -24,7 +24,7 @@ def main_GCON(s, t, BLOSUM62, gap):
             # column vertical
             U[i][j] = max([M[i][j - 1] + gap, U[i][j - 1]])
             # diagonal
-            M[i][j] = max([M[i - 1][j - 1] + BLOSUM62.loc[s[i - 1], t[j - 1]],
+            M[i][j] = max([M[i - 1][j - 1] + scoring_matrix.loc[s[i - 1], t[j - 1]],
                                L[i][j], U[i][j]])
     # bottom-right corner of the M is the max score.
     return M[-1][-1]
