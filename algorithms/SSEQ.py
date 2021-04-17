@@ -1,12 +1,12 @@
 from SPLC import read_fasta
 
-def main_SSEQ(input):
+def main_SSEQ(strings):
     '''
     This function takes 2 strings as input and finds indices
     corresponding to one possible subsequence position of the
     target string in the sequence.
     '''
-    seq, target = input
+    seq, target = strings
     targets = list(target)    
     indices = []
     i = 0
@@ -21,5 +21,5 @@ def main_SSEQ(input):
     return indices
     
 if __name__ == "__main__":
-    input = read_fasta("../datasets/SSEQ_1.txt")
-    print(main_SSEQ(input))
+    strings = read_fasta("../datasets/SSEQ_1.txt")
+    print(main_SSEQ(strings))

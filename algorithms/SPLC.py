@@ -25,9 +25,9 @@ def read_fasta(fname):
                  
     return seqs
     
-def main_SPLC(input):
-    dna = max(input, key = len)
-    introns = [s for s in input if s != dna]
+def main_SPLC(infile):
+    dna = max(infile, key = len)
+    introns = [s for s in infile if s != dna]
     for i in introns:
         dna = dna.replace(i, "")
     
@@ -40,7 +40,7 @@ def main_SPLC(input):
         raise Exception("No exons detected.")
     
 if __name__ == "__main__":
-    input = read_fasta("../datasets/SPLC_1.txt")
+    infile = read_fasta("../datasets/SPLC_1.txt")
     #print(input)
-    print(main_SPLC(input))
+    print(main_SPLC(infile))
     
