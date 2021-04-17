@@ -19,7 +19,10 @@ def read_fasta(fname):
                 seqs.append('')
             else:
                 seqs[-1] += line.strip()
-
+    # error checking
+    for i in seqs:
+        if not i.isalpha():
+            raise Exception('Input Error')
     return seqs
 
 
@@ -34,3 +37,9 @@ def read_score_matrix(fname):
 def BLOSUM62():
     '''Return a BLOSUM62 score matrix dataframe.'''
     return read_score_matrix('../datasets/BLOSUM62.txt')
+
+
+if __name__ == '__main__':  # pragma: no cover
+    test = BLOSUM62()  # pragma: no cover
+    print(BLOSUM62())  # pragma: no cover
+    print(BLOSUM62())  # pragma: no cover
