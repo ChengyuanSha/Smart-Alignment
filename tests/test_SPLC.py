@@ -13,6 +13,21 @@ class TestAlgo(unittest.TestCase):
         result = main_SPLC(input)
         self.assertEqual(sample_answer, result)
 
+    def test_SPLC_2(self):
+        sample_answer = 'FTGVFVTLTEL'
+        rel_path = "../datasets/SPLC_2.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        input = read_fasta(abs_file_path)
+        result = main_SPLC(input)
+        self.assertEqual(sample_answer, result)
+        
+    def test_SPLC_3(self):
+        rel_path = "../datasets/SPLC_3.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        with self.assertRaises(Exception) as context:
+            input = rread_fasta(abs_file_path)
+            main_SPLC(input)
+        self.assertTrue('No exons detected.' in str(context.exception))
 
 if __name__ == '__main__':
     unittest.main() # pragma: no cover

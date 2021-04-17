@@ -13,6 +13,21 @@ class TestAlgo(unittest.TestCase):
         result = main_SSEQ(input)
         self.assertEqual(sample_answer, result)
 
+    def test_SSEQ_2(self):
+        sample_answer = '2 3 5 14 15 21 27 30 26 46'
+        rel_path = "../datasets/SSEQ_2.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        input = read_fasta(abs_file_path)
+        result = main_SSEQ(input)
+        self.assertEqual(sample_answer, result)
 
+    def test_SSEQ_3(self):
+        sample_answer = ''
+        rel_path = "../datasets/SSEQ_3.txt"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        input = read_fasta(abs_file_path)
+        result = main_SSEQ(input)
+        self.assertEqual(sample_answer, result)
+        
 if __name__ == '__main__':
     unittest.main() # pragma: no cover
