@@ -22,7 +22,8 @@ def read_fasta(fname):
 
 
 def read_score_matrix(fname):
-    """Read a score matrix like BLOSUM62.
+    """
+    Read a score matrix like BLOSUM62.
 
     Read a text file of a scoring matrix.
     Return a score matrix dataframe with row and column as amino acids.

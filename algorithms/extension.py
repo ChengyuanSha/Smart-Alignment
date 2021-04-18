@@ -34,7 +34,8 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M, i, j):
 
 
 def main_GAFF(s, t, scoring_matrix, gap, gap_ext):
-    """Global Alignment with Scoring Matrix and Affine Gap Penalty.
+    """
+    Global Alignment with Scoring Matrix and Affine Gap Penalty.
 
     Inputs: Two protein strings s and t in FASTA format.
     Returns: The maximum alignment score between s and t, followed by two augmented strings
