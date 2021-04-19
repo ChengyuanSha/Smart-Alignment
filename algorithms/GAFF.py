@@ -6,7 +6,7 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M, i, j):
     """Traceback best aligned two sequence using table information."""
     s_aligned, t_aligned = s, t
     scores = [L[i][j], U[i][j], M[i][j]]
-    max_score = max(scores)
+    max_score = max(scores) # M[i][j]
     trace = scores.index(max_score)
     i, j = len(s), len(t)
     # Build alignment via trace
@@ -44,7 +44,7 @@ def main_GAFF(s, t, scoring_matrix, gap, gap_ext):
     # initializations
     neg_infinity = -999999
     row, col = len(s) + 1, len(t) + 1
-    M = np.zeros((row, col), dtype=int) # middle scores
+    M = np.zeros((row, col), dtype=int) # main table
     L = np.full((row, col), neg_infinity, dtype=int) # lower scores
     U = np.full((row, col), neg_infinity, dtype=int)  # upper scores
     trace_M = np.zeros((row, col), dtype=int)

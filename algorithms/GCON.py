@@ -10,7 +10,7 @@ def main_GCON(s, t, scoring_matrix, gap):
     and a constant gap penalty equal to 5.
     """
     neg_infinity = -999999
-    M = np.zeros((len(s) + 1, len(t) + 1), dtype=int) # middle scores
+    M = np.zeros((len(s) + 1, len(t) + 1), dtype=int) # main table
     L = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int) # lower scores
     U = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int) # upper scores
     # setting constant gap penalty
