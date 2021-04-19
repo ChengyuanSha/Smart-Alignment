@@ -1,5 +1,5 @@
-from RNA import main_RNA
-from PROT import main_PROT, codons
+from algorithms.RNA import main_RNA
+from algorithms.PROT import main_PROT, codons
     
 def read_input(fname):
     '''

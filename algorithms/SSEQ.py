@@ -1,4 +1,4 @@
-from SPLC import read_fasta
+from algorithms.SPLC import read_fasta
 
 def main_SSEQ(strings):
     '''
