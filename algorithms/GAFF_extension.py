@@ -5,7 +5,8 @@ from algorithms.GAFF import main_GAFF, get_aligned_seq
 from algorithms.HAMM import main_HAMM
 
 
-def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength):
+def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength,
+                    ignore_start_gaps, ignore_end_gaps):
     """Initializations for the main function."""
     neg_infinity = -999999
     row, col = len(s) + 1, len(t) + 1
@@ -15,15 +16,26 @@ def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved
     trace_M = np.zeros((row, col), dtype=int)
     trace_L = np.zeros((row, col), dtype=int)
     trace_U = np.zeros((row, col), dtype=int)
-    M[1:, 0] = np.arange(gap, gap - M.shape[0] + 1, gap_ext)  # init gap penalty
-    M[0, 1:] = np.arange(gap, gap - M.shape[1] + 1, gap_ext)  # init gap penalty
+    if ignore_start_gaps and ignore_end_gaps:
+        M[1:, 0] = 0
+        M[0, 1:] = 0
+    elif ignore_start_gaps and not ignore_end_gaps:
+        M[1:, 0] = 0
+        M[0, 1:] = np.arange(gap, gap - M.shape[1] + 1, gap_ext)  # init gap penalty
+    elif not ignore_start_gaps and ignore_end_gaps:
+        M[1:, 0] = np.arange(gap, gap - M.shape[0] + 1, gap_ext)
+        M[0, 1:] = 0
+    else:
+        M[1:, 0] = np.arange(gap, gap - M.shape[0] + 1, gap_ext)  # init gap penalty
+        M[0, 1:] = np.arange(gap, gap - M.shape[1] + 1, gap_ext)  # init gap penalty
     last_i, last_j = 0, 0
     for i in conserved_seq:
         scoring_matrix.loc[i, i] = conserved_strength
     return M, L, U, trace_M, trace_U, trace_L, last_i, last_j, row, col
 
 
-def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength):
+def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength,
+                  ignore_start_gaps, ignore_end_gaps):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty Extension.
 
@@ -32,7 +44,8 @@ def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_s
     s′ and t′ representing an optimal alignment of s and t.
     """
     M, L, U, trace_M, trace_U, trace_L, last_i, last_j, row, col \
-        = initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength)
+        = initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
+                          conserved_strength, ignore_start_gaps, ignore_end_gaps)
     # Build the table form top left
     for i in range(1, row):
         for j in range(1, col):
@@ -71,10 +84,12 @@ def print_in_colour(s, t, scoring_matrix):
     return new_s, new_t, num_of_gaps
 
 
-def main_extension(fname, conserved_seq, conserved_strength, scoring_matrix):
+def main_extension(fname, conserved_seq, conserved_strength, scoring_matrix, gap, gap_ext,
+                   ignore_start_gaps=False, ignore_end_gaps=False):
     """Modified GAFF algorithm."""
     s, t = read_fasta(fname)
-    max_score, s_aligned, t_aligned = GAFF_extended(s, t, scoring_matrix, -11, -1, conserved_seq, conserved_strength)
+    max_score, s_aligned, t_aligned = GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
+                                                    conserved_strength, ignore_start_gaps, ignore_end_gaps)
     # show important information
     diffs = main_HAMM(s_aligned, t_aligned)
     new_s, new_t, num_of_gaps = print_in_colour(s_aligned, t_aligned, scoring_matrix)
@@ -91,7 +106,8 @@ def experiment1():
     """Compare our extended algorithm VS original algorithm."""
     print("Extended Global Sequence Alignment:")
     print("Scoring matrix used: BLOSUM62.")
-    main_extension('../datasets/extension_1.txt', 'STAY', 30, BLOSUM62())
+    main_extension('../datasets/extension_1.txt', 'STAY', 30, BLOSUM62(), -11, -1)
+    # original GAFF
     print("Original Global Sequence Alignment:")
     print("Scoring matrix used: BLOSUM62.")
     s, t = read_fasta('../datasets/extension_1.txt')  # pragma: no cover
@@ -106,5 +122,16 @@ def experiment1():
     print(new_t)
 
 
+def experiment2():
+    """Semi-global alignment experiment."""
+    # Original alignment
+    main_extension('../datasets/extension_2.txt', 'STAY', 30, BLOSUM62(), -15, -1,
+                   ignore_start_gaps=False, ignore_end_gaps=False)
+    # Semi-global alignment
+    main_extension('../datasets/extension_2.txt', 'STAY', 30, BLOSUM62(), -8, -1,
+                   ignore_start_gaps=True, ignore_end_gaps=True)
+
+
 if __name__ == '__main__':
-    experiment1()
+    # experiment1()
+    experiment2()
