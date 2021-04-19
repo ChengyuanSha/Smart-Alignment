@@ -21,5 +21,5 @@ def main_SSEQ(strings):
     return indices
     
 if __name__ == "__main__":
-    strings = read_fasta("../datasets/SSEQ_1.txt")
+    strings = read_fasta("../datasets/SSEQ_2.txt")
     print(main_SSEQ(strings))
