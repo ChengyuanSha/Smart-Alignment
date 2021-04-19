@@ -40,7 +40,7 @@ def main_SPLC(infile):
         raise Exception("No exons detected.")
     
 if __name__ == "__main__":
-    infile = read_fasta("../datasets/SPLC_1.txt")
+    infile = read_fasta("../datasets/SPLC_3.txt")
     #print(input)
     print(main_SPLC(infile))
     
