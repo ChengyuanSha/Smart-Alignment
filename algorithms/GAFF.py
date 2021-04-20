@@ -1,6 +1,7 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 
+
 def add_leading_gaps(t_aligned, s_aligned, i, j):
     """Add the leading gaps to alignments."""
     for _ in range(i):
@@ -8,6 +9,7 @@ def add_leading_gaps(t_aligned, s_aligned, i, j):
     for _ in range(j):
         s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
     return s_aligned, t_aligned
+
 
 def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M):
     """Traceback best aligned two sequence using table information."""
@@ -33,8 +35,9 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M):
             else:
                 i -= 1
                 j -= 1
-    s_aligned, t_aligned =  add_leading_gaps(t_aligned, s_aligned, i, j)
+    s_aligned, t_aligned = add_leading_gaps(t_aligned, s_aligned, i, j)
     return np.amax(scores), s_aligned, t_aligned
+
 
 def init_variables(s, t):
     """Initialization of all variables used in dynamic table."""

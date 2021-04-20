@@ -49,8 +49,10 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
                 j -= 1
                 s_aligned = s_aligned[:i] + '-' + s_aligned[i:]
             elif trace == 2:  # diagonal, no need to add
-                if trace_M[i][j] == 1: trace = 0
-                elif trace_M[i][j] == 2: trace = 1
+                if trace_M[i][j] == 1:
+                    trace = 0
+                elif trace_M[i][j] == 2:
+                    trace = 1
                 else:
                     i -= 1
                     j -= 1

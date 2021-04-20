@@ -1,6 +1,7 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 
+
 def main_GCON(s, t, scoring_matrix, gap):
     """
     Global Alignment with Constant Gap Penalty.
@@ -10,9 +11,9 @@ def main_GCON(s, t, scoring_matrix, gap):
     and a constant gap penalty equal to 5.
     """
     neg_infinity = -999999
-    M = np.zeros((len(s) + 1, len(t) + 1), dtype=int) # main table
-    L = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int) # lower scores
-    U = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int) # upper scores
+    M = np.zeros((len(s) + 1, len(t) + 1), dtype=int)  # main table
+    L = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int)  # lower scores
+    U = np.full((len(s) + 1, len(t) + 1), neg_infinity, dtype=int)  # upper scores
     # setting constant gap penalty
     M[1:, 0] = gap
     M[0, 1:] = gap
@@ -25,7 +26,7 @@ def main_GCON(s, t, scoring_matrix, gap):
             U[i][j] = max([M[i][j - 1] + gap, U[i][j - 1]])
             # diagonal
             M[i][j] = max([M[i - 1][j - 1] + scoring_matrix.loc[s[i - 1], t[j - 1]],
-                               L[i][j], U[i][j]])
+                           L[i][j], U[i][j]])
     # bottom-right corner of the M is the max score.
     return M[-1][-1]
 

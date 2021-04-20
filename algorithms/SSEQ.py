@@ -1,5 +1,6 @@
 from algorithms.SPLC import read_fasta
 
+
 def main_SSEQ(strings):
     '''
     This function takes 2 strings as input and finds indices
@@ -18,7 +19,8 @@ def main_SSEQ(strings):
             else:
                 break
     return indices
-    
+
+
 if __name__ == "__main__":
     strings = read_fasta("../datasets/SSEQ_2.txt")
     print(main_SSEQ(strings))
