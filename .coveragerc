@@ -22,5 +22,9 @@ exclude_lines =
 
 ignore_errors = True
 
+omit =
+    algorithms/experiments.py
+    algorithms/figures.py
+
 [html]
 directory = coverage_html_report

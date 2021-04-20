@@ -70,8 +70,8 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
     return np.argmax(scores), s_aligned, t_aligned
 
 
-def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength, bound,
-                  ignore_start_gaps, ignore_end_gaps):
+def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
+                  ignore_start_gaps=False, ignore_end_gaps=False):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty Extension.
 
@@ -165,5 +165,5 @@ def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conser
 
 
 if __name__ == '__main__':
-    main_extension('../datasets/extension_2.txt', BLOSUM62(), -15, -2,
+    main_extension('../datasets/extension_5.txt', BLOSUM62(), -11, -1,
                    ignore_start_gaps=False, ignore_end_gaps=False)  # pragma: no cover
