@@ -1,6 +1,9 @@
 from SPLC import read_fasta
 
-def edit_align(s, t):
+def main_EDTA(seqs):
+    
+    s, t = seqs
+
     # Initialize the distance and traceback matrices with zeros.
     d = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
     traceback = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
@@ -50,5 +53,5 @@ def edit_align(s, t):
 
 
 if __name__ == '__main__':
-    input = read_input("../datasets/EDTA_1.txt")
-    print(main_EDTA(input))
+    seqs = read_fasta("../datasets/EDTA_1.txt")
+    print(main_EDTA(seqs))

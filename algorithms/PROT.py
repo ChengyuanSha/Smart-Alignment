@@ -1,7 +1,7 @@
 def codons():
     '''
     Helper function which creates a mapping of 3-tuples representing RNA codons
-    mapped onto their corresponding amino acids. Asterisk (*) represents a 
+    mapped onto their corresponding amino acids. Asterisk (*) represents a
     STOP codon.
     '''
     bases = ["U", "C", "A", "G"]
@@ -19,8 +19,8 @@ def main_PROT(rna):
     mapping = codons()
     pep = ""
     
-    for tuple in range(0, len(rna), 3):
-        codon = rna[tuple:tuple+3]
+    for frame in range(0, len(rna), 3):
+        codon = rna[frame:frame+3]
         aa = mapping.get(codon, "*")
         if aa != "*":
             pep += aa
@@ -30,5 +30,5 @@ def main_PROT(rna):
     return pep
 
 if __name__ == "__main__":
-    rna = read_input("../datasets/PROT_2.txt")
+    rna = read_input("../datasets/PROT_3.txt")
     print(main_PROT(rna))

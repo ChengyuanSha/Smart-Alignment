@@ -1,17 +1,13 @@
 from algorithms.RNA import main_RNA
-from algorithms.PROT import main_PROT, codons
+from algorithms.PROT import main_PROT
     
 def read_input(fname):
-    '''
-    Read txt file containing A DNA string.
-    '''
+    '''Read txt file containing A DNA string.'''
     with open(fname, 'r') as f:
         return f.read()
 
 def read_fasta(fname):
-    ''' 
-    Read in a Fasta file and returns a list of sequences.
-    '''
+    '''Read in a Fasta file and returns a list of sequences.'''
     temp = []
     seqs = []
     

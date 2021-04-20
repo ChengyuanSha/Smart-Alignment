@@ -15,5 +15,5 @@ def main_SUBS(infile):
     return indices
     
 if __name__ == "__main__":
-    infile = read_input("../datasets/SUBS_1.txt")
+    infile = read_input("../datasets/SUBS_3.txt")
     print(main_SUBS(infile))

@@ -7,7 +7,7 @@ def main_SSEQ(strings):
     target string in the sequence.
     '''
     seq, target = strings
-    targets = list(target)    
+    targets = list(target)
     indices = []
     i = 0
     for loc, s in enumerate(seq):
@@ -17,7 +17,6 @@ def main_SSEQ(strings):
                 i += 1
             else:
                 break
-    
     return indices
     
 if __name__ == "__main__":
