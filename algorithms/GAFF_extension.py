@@ -1,7 +1,6 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 from colorama import Fore, Style
-from algorithms.GAFF import main_GAFF
 from algorithms.HAMM import main_HAMM
 
 
@@ -23,8 +22,9 @@ def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved
         # init beginning gap penalty
         M[1:, 0] = np.arange(gap, gap - M.shape[0] * abs(gap_ext) + abs(gap_ext), gap_ext)
         M[0, 1:] = np.arange(gap, gap - M.shape[1] * abs(gap_ext) + abs(gap_ext), gap_ext)
-    for i in conserved_seq:
-        scoring_matrix.loc[i, i] = conserved_strength
+    if conserved_seq != "":
+        for i in conserved_seq:
+            scoring_matrix.loc[i, i] = conserved_strength
     return M, L, U, trace_M, trace_U, trace_L, row, col
 
 
@@ -70,12 +70,16 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
     return np.argmax(scores), s_aligned, t_aligned
 
 
-def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength,
+def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength, bound,
                   ignore_start_gaps, ignore_end_gaps):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty Extension.
 
     Inputs: Two protein strings s and t in FASTA format.
+            conserved_seq: will increase the weight on the sequence.
+            conserved_strength: weight on conserved_seq.
+            bound: Define the range of bound dynamic programming. Negative number will run unbound version.
+
     Returns: The maximum alignment score between s and t, followed by two augmented strings
     s′ and t′ representing an optimal alignment of s and t.
     """
@@ -83,20 +87,38 @@ def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_s
         = initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
                           conserved_strength, ignore_start_gaps)
     # Build the table form top left
-    for i in range(1, row):
-        for j in range(1, col):
-            costL = [M[i - 1, j] + gap, L[i - 1, j] + gap_ext]
-            L[i, j] = np.max(costL)
-            trace_L[i, j] = costL.index(L[i, j])
+    if bound > 0:  # bound version
+        for i in range(1, row):
+            for j in range(max(1, i - bound), min(col, i + bound)):
+                if j < i + bound:
+                    costL = [M[i - 1, j] + gap, L[i - 1, j] + gap_ext]
+                    L[i, j] = np.max(costL)
+                    trace_L[i, j] = costL.index(L[i, j])
+                if j > i - bound:
+                    costU = [M[i, j - 1] + gap, U[i, j - 1] + gap_ext]
+                    U[i, j] = np.max(costU)
+                    trace_U[i, j] = costU.index(U[i, j])
 
-            costU = [M[i, j - 1] + gap, U[i, j - 1] + gap_ext]
-            U[i, j] = np.max(costU)
-            trace_U[i, j] = costU.index(U[i, j])
+                costM = [M[i - 1, j - 1] + scoring_matrix.loc[s[i - 1], t[j - 1]],
+                         L[i, j], U[i, j]]
+                M[i, j] = np.max(costM)
+                trace_M[i, j] = costM.index(M[i, j])
+    else:  # un-bound version
+        for i in range(1, row):
+            for j in range(1, col):
+                costL = [M[i - 1, j] + gap, L[i - 1, j] + gap_ext]
+                L[i, j] = np.max(costL)
+                trace_L[i, j] = costL.index(L[i, j])
 
-            costM = [M[i - 1, j - 1] + scoring_matrix.loc[s[i - 1], t[j - 1]],
-                     L[i, j], U[i, j]]
-            M[i, j] = np.max(costM)
-            trace_M[i, j] = costM.index(M[i, j])
+                costU = [M[i, j - 1] + gap, U[i, j - 1] + gap_ext]
+                U[i, j] = np.max(costU)
+                trace_U[i, j] = costU.index(U[i, j])
+
+                costM = [M[i - 1, j - 1] + scoring_matrix.loc[s[i - 1], t[j - 1]],
+                         L[i, j], U[i, j]]
+                M[i, j] = np.max(costM)
+                trace_M[i, j] = costM.index(M[i, j])
+
     return get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gaps)
 
 
@@ -118,6 +140,7 @@ def print_seq_in_colour(s, t, scoring_matrix):
             new_t += (Fore.LIGHTRED_EX + t[i])
     return new_s, new_t, num_of_gaps
 
+
 def print_all_info(s_aligned, t_aligned, max_score, scoring_matrix):
     """Print all sequence alignment information."""
     diffs = main_HAMM(s_aligned, t_aligned)
@@ -131,38 +154,16 @@ def print_all_info(s_aligned, t_aligned, max_score, scoring_matrix):
     print(Style.RESET_ALL)
 
 
-def main_extension(fname, conserved_seq, conserved_strength, scoring_matrix, gap, gap_ext,
+def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
                    ignore_start_gaps=False, ignore_end_gaps=False):
-    """Modified GAFF algorithm."""
+    """Main function of modified GAFF algorithm."""
     s, t = read_fasta(fname)
     max_score, s_aligned, t_aligned = GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
-                                                    conserved_strength, ignore_start_gaps, ignore_end_gaps)
+                                                    conserved_strength, bound, ignore_start_gaps, ignore_end_gaps)
     # show important information
     print_all_info(s_aligned, t_aligned, max_score, scoring_matrix)
 
 
-def experiment1():
-    """Compare our extended algorithm VS original algorithm."""
-    print("Extended Global Sequence Alignment:")
-    print("Scoring matrix used: BLOSUM62.")
-    main_extension('../datasets/extension_1.txt', 'STAY', 30, BLOSUM62(), -11, -1)
-    # Comparison with original GAFF algorithm
-    print("Original Global Sequence Alignment:")
-    print("Scoring matrix used: BLOSUM62.")
-    s, t = read_fasta('../datasets/extension_1.txt')
-    max_score, s_aligned, t_aligned = main_GAFF(s, t, BLOSUM62(), -11, -1)
-    print_all_info(s_aligned, t_aligned, max_score,  BLOSUM62())
-
-def experiment2():
-    """Semi-global alignment experiment."""
-    # Semi-global alignment
-    main_extension('../datasets/extension_2.txt', 'STAY', 30, BLOSUM62(), -15, -2,
-                   ignore_start_gaps=True, ignore_end_gaps=True)
-    # Comparison with original GAFF algorithm
-    main_extension('../datasets/extension_2.txt', 'STAY', 30, BLOSUM62(), -10, -2,
-                   ignore_start_gaps=False, ignore_end_gaps=False)
-
-
 if __name__ == '__main__':
-    experiment1()
-    # experiment2()
+    main_extension('../datasets/extension_2.txt', BLOSUM62(), -15, -2,
+                   ignore_start_gaps=False, ignore_end_gaps=False)  # pragma: no cover

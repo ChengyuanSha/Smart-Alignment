@@ -1,0 +1,4 @@
+>Test seq1
+GTGTTGCAGG
+>Test seq2
+TTCTCTAACA
