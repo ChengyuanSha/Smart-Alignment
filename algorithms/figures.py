@@ -1,7 +1,6 @@
 import random
 from GAFF_extension import main_extension
-from algorithms.utils import read_fasta, BLOSUM62
-from GAFF import main_GAFF
+from algorithms.utils import BLOSUM62
 import time
 
 
@@ -22,7 +21,7 @@ def write_2dna_to_file(length):
 def compare_efficiency():
     """Compare unmodified VS improved version."""
     time_ori, time_bound, x_range = [], [], []
-    for dna_len in range(10, 300, 20):
+    for dna_len in range(10, 400, 10):
         write_2dna_to_file(dna_len)
         print("Unbounded Version: ")
         temp1 = []
@@ -42,11 +41,11 @@ def compare_efficiency():
             temp2.append(time.time() - start)
         time_bound.append(round(sum(temp2) / len(temp2), 6))
         x_range.append(dna_len)
-    print(list(zip(x_range, time_ori)))
-    print(list(zip(x_range, time_bound)))
+    print(*list(zip(x_range, time_ori)), sep='')
+    print(*list(zip(x_range, time_bound)), sep='')
 
 
 if __name__ == '__main__':
-    # print(generate_DNA_data(100))
-    # write_2dna_to_file(1000)
-    compare_efficiency()
+    # print(generate_DNA_data(100)) # pragma: no cover
+    # write_2dna_to_file(1000) # pragma: no cover
+    compare_efficiency()  # pragma: no cover

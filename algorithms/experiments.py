@@ -36,6 +36,6 @@ def experiment3():
 
 
 if __name__ == '__main__':
-    experiment1()
-    # experiment2()
-    # experiment3()
+    experiment1() # pragma: no cover
+    # experiment2() # pragma: no cover
+    # experiment3() # pragma: no cover
