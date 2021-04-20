@@ -2,19 +2,13 @@ from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 from colorama import Fore, Style
 from algorithms.HAMM import main_HAMM
+from algorithms.GAFF import add_leading_gaps, init_variables
 
 
 def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength,
                     ignore_start_gaps):
     """Initializations for the main function."""
-    neg_infinity = -999999
-    row, col = len(s) + 1, len(t) + 1
-    M = np.zeros((row, col), dtype=int)  # middle scores
-    L = np.full((row, col), neg_infinity, dtype=int)  # lower scores
-    U = np.full((row, col), neg_infinity, dtype=int)  # upper scores
-    trace_M = np.zeros((row, col), dtype=int)
-    trace_L = np.zeros((row, col), dtype=int)
-    trace_U = np.zeros((row, col), dtype=int)
+    M, L, U, trace_M, trace_L, trace_U, row, col = init_variables(s, t)
     if ignore_start_gaps:
         M[1:, 0] = 0
         M[0, 1:] = 0
@@ -55,18 +49,12 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
                 j -= 1
                 s_aligned = s_aligned[:i] + '-' + s_aligned[i:]
             elif trace == 2:  # diagonal, no need to add
-                if trace_M[i][j] == 1:
-                    trace = 0
-                elif trace_M[i][j] == 2:
-                    trace = 1
+                if trace_M[i][j] == 1: trace = 0
+                elif trace_M[i][j] == 2: trace = 1
                 else:
                     i -= 1
                     j -= 1
-    # Check the leading gaps
-    for _ in range(i):
-        t_aligned = t_aligned[:0] + '-' + t_aligned[0:]
-    for _ in range(j):
-        s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
+    s_aligned, t_aligned = add_leading_gaps(t_aligned, s_aligned, i, j)
     return np.argmax(scores), s_aligned, t_aligned
 
 

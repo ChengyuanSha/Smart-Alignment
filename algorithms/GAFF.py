@@ -1,6 +1,13 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 
+def add_leading_gaps(t_aligned, s_aligned, i, j):
+    """Add the leading gaps to alignments."""
+    for _ in range(i):
+        t_aligned = t_aligned[:0] + '-' + t_aligned[0:]
+    for _ in range(j):
+        s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
+    return s_aligned, t_aligned
 
 def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M):
     """Traceback best aligned two sequence using table information."""
@@ -26,12 +33,20 @@ def get_aligned_seq(s, t, L, U, M, trace_L, trace_U, trace_M):
             else:
                 i -= 1
                 j -= 1
-    # check the leading gaps
-    for _ in range(i):
-        t_aligned = t_aligned[:0] + '-' + t_aligned[0:]
-    for _ in range(j):
-        s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
+    s_aligned, t_aligned =  add_leading_gaps(t_aligned, s_aligned, i, j)
     return np.amax(scores), s_aligned, t_aligned
+
+def init_variables(s, t):
+    """Initialization of all variables used in dynamic table."""
+    neg_infinity = -999999
+    row, col = len(s) + 1, len(t) + 1
+    M = np.zeros((row, col), dtype=int)  # main table
+    L = np.full((row, col), neg_infinity, dtype=int)  # lower scores
+    U = np.full((row, col), neg_infinity, dtype=int)  # upper scores
+    trace_M = np.zeros((row, col), dtype=int)
+    trace_L = np.zeros((row, col), dtype=int)
+    trace_U = np.zeros((row, col), dtype=int)
+    return M, L, U, trace_M, trace_L, trace_U, row, col
 
 
 def main_GAFF(s, t, scoring_matrix, gap, gap_ext):
@@ -42,15 +57,7 @@ def main_GAFF(s, t, scoring_matrix, gap, gap_ext):
     Returns: The maximum alignment score between s and t, followed by two augmented strings
     s′ and t′ representing an optimal alignment of s and t.
     """
-    # initializations
-    neg_infinity = -999999
-    row, col = len(s) + 1, len(t) + 1
-    M = np.zeros((row, col), dtype=int)  # main table
-    L = np.full((row, col), neg_infinity, dtype=int)  # lower scores
-    U = np.full((row, col), neg_infinity, dtype=int)  # upper scores
-    trace_M = np.zeros((row, col), dtype=int)
-    trace_L = np.zeros((row, col), dtype=int)
-    trace_U = np.zeros((row, col), dtype=int)
+    M, L, U, trace_M, trace_L, trace_U, row, col = init_variables(s, t)
     # init beginning gap penalty
     M[1:, 0] = np.arange(gap, gap - M.shape[0] * abs(gap_ext) + abs(gap_ext), gap_ext)
     M[0, 1:] = np.arange(gap, gap - M.shape[1] * abs(gap_ext) + abs(gap_ext), gap_ext)
