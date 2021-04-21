@@ -20,9 +20,11 @@ def experiment1():
 def experiment2():
     """Semi-global alignment experiment."""
     # Semi-global alignment
+    print("Semi-global alignment:")
     main_extension('../datasets/extension_2.txt', BLOSUM62(), -15, -2,
                    ignore_start_gaps=True, ignore_end_gaps=True)
     # Comparison with original GAFF algorithm
+    print("Original alignment:")
     main_extension('../datasets/extension_2.txt', BLOSUM62(), -15, -2,
                    ignore_start_gaps=False, ignore_end_gaps=False)
 
@@ -36,6 +38,6 @@ def experiment3():
 
 
 if __name__ == '__main__':
-    experiment1()  # pragma: no cover
-    # experiment2() # pragma: no cover
+    # experiment1()  # pragma: no cover
+    experiment2() # pragma: no cover
     # experiment3() # pragma: no cover

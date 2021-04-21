@@ -21,7 +21,7 @@ def write_2dna_to_file(length):
 def compare_efficiency():
     """Compare unmodified VS improved version."""
     time_ori, time_bound, x_range = [], [], []
-    for dna_len in range(10, 400, 10):
+    for dna_len in range(10, 601, 10):
         write_2dna_to_file(dna_len)
         print("Unbounded Version: ")
         temp1 = []
