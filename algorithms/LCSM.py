@@ -1,8 +1,8 @@
-import utils
+import algorithms.utils as utils
 
 
 def main_LCSM(fname):
-    dataset = utils.get_dna(fname)
+    dataset = utils.read_fasta(fname)
     substr = ''
     if len(dataset) > 1 and len(dataset[0]) > 0:
         for i in range(len(dataset[0])):
@@ -14,3 +14,4 @@ def main_LCSM(fname):
 
 if __name__ == '__main__':
     print(main_LCSM('../datasets/LCSM_1.txt'))  # pragma: no cover
+
