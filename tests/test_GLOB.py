@@ -9,6 +9,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_GLOB_1(self):
         """
+
         Rosalind Test
         :return:
         """
@@ -20,6 +21,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_GLOB_2(self):
         """
+
         Invalid amino acid shorthand
         :return:
         """
@@ -30,6 +32,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_GLOB_3(self):
         """
+
         Invalid FASTA file
         :return:
         """
@@ -40,6 +43,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_GLOB_4(self):
         """
+
         Empty .txt File
         :return:
         """

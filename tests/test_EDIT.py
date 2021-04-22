@@ -9,6 +9,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_EDIT_1(self):
         """
+
         Rosalind Test
         :return:
         """
@@ -20,6 +21,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_EDIT_2(self):
         """
+
         Invalid FASTA file
         :return:
         """
@@ -30,6 +32,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_EDIT_3(self):
         """
+
         Empty .txt File
         :return:
         """

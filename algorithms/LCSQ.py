@@ -3,6 +3,7 @@ import numpy as np
 
 def fill_matrix(s, t):
     """
+
     Takes two strings and scores the length of the longest common subsequence at each index
     :param s:string1
     :param t:string2
@@ -20,6 +21,7 @@ def fill_matrix(s, t):
 
 def trace(s, t, M, i, j):
     """
+
     Trace a matrix filled with the values of longest subsequence where M(i,j) is score between s(i), t(j)
     :param s: string1
     :param t: string2
@@ -40,6 +42,7 @@ def trace(s, t, M, i, j):
 
 def main_LCSQ(fname):
     """
+
     returns the longest common subsequence of two strings from a .txt file in FASTA format
     :param fname: .txt file in FASTA format
     :return:Longest common subsequence

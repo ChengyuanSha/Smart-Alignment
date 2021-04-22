@@ -9,6 +9,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_LCSM_1(self):
         """
+
         Rosalind Test: Note the rosalind test inputs can return TA or AC
         :return:
         """
@@ -20,6 +21,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_LCSM_2(self):
         """
+
         Tests for invalid input from text file
         :return:
         """
@@ -30,6 +32,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_LCSM_3(self):
         """
+
         tests for a blank text file
         :return:
         """
@@ -40,6 +43,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_LCSM_4(self):
         """
+
         Tests for returning an empty substring
         :return:
         """
@@ -51,6 +55,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_LCSM_5(self):
         """
+
         Tests for invalid FASTA file format
         :return:
         """

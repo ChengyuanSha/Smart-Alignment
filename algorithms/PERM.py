@@ -1,5 +1,6 @@
 def main_PERM(fname):
     """
+
     Takes an integer n and returns all permutations of integers 1 to n, and the number of permutations
     :param fname: txt file with an integer >1 in it
     :return: all permutations of the list of integers from 1 to n
@@ -17,6 +18,7 @@ def main_PERM(fname):
 
 def permutations(numbers):
     """
+
     Takes a list of integers and returns all permutations of integers 1 to n
     :param numbers:list of integers from 1 to n
     :return:all permutations of list of integers 1 to n

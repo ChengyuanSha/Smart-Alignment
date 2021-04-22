@@ -3,6 +3,7 @@ import algorithms.utils as utils
 
 def main_LCSM(fname):
     """
+
     Finds the longest common substring of 100 or less strings from a FASTA format file
     :param fname:txt file in FASTA format
     :return:Longest common substring

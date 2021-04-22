@@ -4,6 +4,7 @@ import numpy as np
 
 def score(s, t, g, scoring_matrix):
     """
+
     Takes two protein strings, s and t, a gap penalty, and a scoring matrix and returns the maximum score of the
     global alignment of the two strings.
     :param s: string1
@@ -33,6 +34,7 @@ def score(s, t, g, scoring_matrix):
 
 def main_GLOB(fname):
     """
+
     Takes two protein strings from a .txt in FASTA format and returns the length of the maximum scoring global
     alignment using BLOSUM62 matrix and a gap penalty of 5.
     :param fname: .txt file in FASTA format

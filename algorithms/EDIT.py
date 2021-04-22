@@ -4,6 +4,7 @@ import algorithms.utils as utils
 
 def edit_distance(s, t):
     """
+
     Takes two protein strings s and t and returns the edit distance between them
     :param s: string1
     :param t: string2
@@ -29,6 +30,7 @@ def edit_distance(s, t):
 
 def main_EDIT(fname):
     """
+
     Takes two protein strings in fasta format and returns the edit distance between the two
     :param fname: txt file in FASTA format
     :return:edit distance between the two strings

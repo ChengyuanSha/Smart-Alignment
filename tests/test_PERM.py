@@ -9,6 +9,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_PERM_1(self):
         """
+
         Rosalind Test
         :return:
         """
@@ -20,6 +21,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_PERM_2(self):
         """
+
         Test for invalid input
         :return:
         """
@@ -30,6 +32,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_PERM_3(self):
         """
+
         Test for empty input
         :return:
         """
