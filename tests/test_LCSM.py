@@ -25,8 +25,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSM_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(ValueError) as context:
-            result = main_LCSM(abs_file_path)
+        with self.assertRaises(ValueError):
+            main_LCSM(abs_file_path)
 
     def test_LCSM_3(self):
         """
@@ -35,8 +35,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSM_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(ValueError) as context:
-            result = main_LCSM(abs_file_path)
+        with self.assertRaises(ValueError):
+            main_LCSM(abs_file_path)
 
     def test_LCSM_4(self):
         """
@@ -56,8 +56,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSM_5.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = main_LCSM(abs_file_path)
+        with self.assertRaises(IndexError):
+            main_LCSM(abs_file_path)
 
 
 if __name__ == '__main__':

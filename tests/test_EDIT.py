@@ -25,8 +25,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/EDIT_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = algo.main_EDIT(abs_file_path)
+        with self.assertRaises(IndexError):
+            algo.main_EDIT(abs_file_path)
 
     def test_EDIT_3(self):
         """
@@ -35,8 +35,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/EDIT_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = algo.main_EDIT(abs_file_path)
+        with self.assertRaises(IndexError):
+            algo.main_EDIT(abs_file_path)
 
 
 

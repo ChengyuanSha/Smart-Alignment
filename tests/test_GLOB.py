@@ -25,8 +25,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/GLOB_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(KeyError) as context:
-            result = main_GLOB(abs_file_path)
+        with self.assertRaises(KeyError):
+            main_GLOB(abs_file_path)
 
     def test_GLOB_3(self):
         """
@@ -35,8 +35,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/GLOB_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = main_GLOB(abs_file_path)
+        with self.assertRaises(IndexError):
+            main_GLOB(abs_file_path)
 
     def test_GLOB_4(self):
         """
@@ -45,8 +45,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/GLOB_4.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = main_GLOB(abs_file_path)
+        with self.assertRaises(IndexError):
+            main_GLOB(abs_file_path)
 
 
 if __name__ == '__main__':

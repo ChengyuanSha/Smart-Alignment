@@ -25,8 +25,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSQ_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = algo.main_LCSQ(abs_file_path)
+        with self.assertRaises(IndexError) :
+            algo.main_LCSQ(abs_file_path)
 
     def test_LCSQ_3(self):
         """
@@ -35,8 +35,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSQ_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(IndexError) as context:
-            result = algo.main_LCSQ(abs_file_path)
+        with self.assertRaises(IndexError):
+            algo.main_LCSQ(abs_file_path)
 
 
 

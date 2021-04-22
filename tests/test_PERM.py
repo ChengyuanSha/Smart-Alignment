@@ -25,8 +25,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSQ_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(ValueError) as context:
-            result = algo.main_PERM(abs_file_path)
+        with self.assertRaises(ValueError):
+            algo.main_PERM(abs_file_path)
 
     def test_PERM_3(self):
         """
@@ -35,8 +35,8 @@ class TestAlgo(unittest.TestCase):
         """
         rel_path = "../datasets/LCSQ_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        with self.assertRaises(ValueError) as context:
-            result = algo.main_PERM(abs_file_path)
+        with self.assertRaises(ValueError):
+            algo.main_PERM(abs_file_path)
 
 
 
