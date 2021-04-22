@@ -71,9 +71,12 @@ def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserve
             conserved_seq: will increase the weight on the sequence.
             conserved_strength: weight on conserved_seq.
             bound: Define the range of bound dynamic programming. Negative number will run unbound version.
+            auto_bound: Auto calculate the bound size using DNA length difference.
+            ignore_start_gaps: ignoring start gaps in alignment, default False.
+            ignore_end_gaps: ignoring end gaps in alignment, default False.
 
     Returns: The maximum alignment score between s and t, followed by two augmented strings
-    s′ and t′ representing an optimal alignment of s and t.
+             s′ and t′ representing an optimal alignment of s and t.
     """
     M, L, U, trace_M, trace_U, trace_L, row, col, bound \
         = initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
