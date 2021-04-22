@@ -40,8 +40,8 @@ coverage run -m unittest discover
 
 Please install all requirements from `requirements.txt`.
 
-`Figures.py `run the efficiency experiment of bounded DP algorithm VS un-bounded DP.
-* change `sec_len_divisor` to produce different length DNA.
+`Figures.py `run the `efficiency experiment` of bounded DP algorithm VS un-bounded DP and `comparing optimal scores`
+of .
 
 `experiments.py` contains all experiments performed by us.
 

@@ -5,10 +5,12 @@ from algorithms.HAMM import HAMM
 from algorithms.GAFF import add_leading_gaps, init_variables
 
 
-def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength,
-                    ignore_start_gaps):
+def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved_strength, bound,
+                    ignore_start_gaps, auto_bound):
     """Initializations for the main function."""
     M, L, U, trace_M, trace_L, trace_U, row, col = init_variables(s, t)
+    if auto_bound:
+        bound = 10 + abs(len(s) - len(t))
     if ignore_start_gaps:
         M[1:, 0] = 0
         M[0, 1:] = 0
@@ -19,7 +21,7 @@ def initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq, conserved
     if conserved_seq != "":
         for i in conserved_seq:
             scoring_matrix.loc[i, i] = conserved_strength
-    return M, L, U, trace_M, trace_U, trace_L, row, col
+    return M, L, U, trace_M, trace_U, trace_L, row, col, bound
 
 
 def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gaps):
@@ -61,7 +63,7 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
 
 
 def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
-                  ignore_start_gaps=False, ignore_end_gaps=False):
+                  ignore_start_gaps=False, ignore_end_gaps=False, auto_bound = False):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty Extension.
 
@@ -73,9 +75,9 @@ def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserve
     Returns: The maximum alignment score between s and t, followed by two augmented strings
     s′ and t′ representing an optimal alignment of s and t.
     """
-    M, L, U, trace_M, trace_U, trace_L, row, col \
+    M, L, U, trace_M, trace_U, trace_L, row, col, bound \
         = initializations(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
-                          conserved_strength, ignore_start_gaps)
+                          conserved_strength, bound, ignore_start_gaps, auto_bound)
     # Build the table form top left
     if bound > 0:  # bound version
         for i in range(1, row):
@@ -145,11 +147,12 @@ def print_all_info(s_aligned, t_aligned, max_score, scoring_matrix):
 
 
 def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
-                   ignore_start_gaps=False, ignore_end_gaps=False):
+                   ignore_start_gaps=False, ignore_end_gaps=False, auto_bound = False):
     """Main function of modified GAFF algorithm."""
     s, t = read_fasta(fname)
     max_score, s_aligned, t_aligned = GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq,
-                                                    conserved_strength, bound, ignore_start_gaps, ignore_end_gaps)
+                                                    conserved_strength, bound, ignore_start_gaps,
+                                                    ignore_end_gaps, auto_bound)
     # show important information
     print_all_info(s_aligned, t_aligned, max_score, scoring_matrix)
     return max_score, s_aligned, t_aligned
@@ -157,4 +160,4 @@ def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conser
 
 if __name__ == '__main__':
     main_extension('../datasets/extension_5.txt', BLOSUM62(), -11, -1,
-                   ignore_start_gaps=False, ignore_end_gaps=False)  # pragma: no cover
+                   ignore_start_gaps=False, ignore_end_gaps=False, auto_bound=True)  # pragma: no cover
