@@ -1,7 +1,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c6150e482d28425a8895843df1b2a640)](https://app.codacy.com/gh/ChengyuanSha/Smart-Alignment?utm_source=github.com&utm_medium=referral&utm_content=ChengyuanSha/Smart-Alignment&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/bff56bab2b5741ccade6610ce3e0df49)](https://www.codacy.com/gh/ChengyuanSha/Smart-Alignment/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ChengyuanSha/Smart-Alignment&amp;utm_campaign=Badge_Coverage)
 
-## Global Alignment with Scoring Matrix and Affine Gap Penalty 
+## Global Alignment with Scoring Matrix, Custom Weight, Affine Gap Penalty and Bounded Dynamic Programming (DP) Acceleration.
 
 ## Development Notes (will remove after finish)
 
@@ -37,7 +37,17 @@ coverage run -m unittest discover
 
 
 ## Running Instruction
-Please install all requirements from requirements.txt.
+
+Please install all requirements from `requirements.txt`.
+
+`Figures.py `run the efficiency experiment of bounded DP algorithm VS un-bounded DP.
+* change `sec_len_divisor` to produce different length DNA.
+
+`experiments.py` contains all experiments performed by us.
+
+## More Info 
+
+* extension data file 1-3 are used by experiment 
 
 
 

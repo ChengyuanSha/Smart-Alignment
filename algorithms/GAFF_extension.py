@@ -1,7 +1,7 @@
 from algorithms.utils import read_fasta, BLOSUM62
 import numpy as np
 from colorama import Fore, Style
-from algorithms.HAMM import main_HAMM
+from algorithms.HAMM import HAMM
 from algorithms.GAFF import add_leading_gaps, init_variables
 
 
@@ -133,7 +133,7 @@ def print_seq_in_colour(s, t, scoring_matrix):
 
 def print_all_info(s_aligned, t_aligned, max_score, scoring_matrix):
     """Print all sequence alignment information."""
-    diffs = main_HAMM(s_aligned, t_aligned)
+    diffs = HAMM(s_aligned, t_aligned)
     new_s, new_t, num_of_gaps = print_seq_in_colour(s_aligned, t_aligned, scoring_matrix)
     print('Align score', max_score)
     print('Similarity:', len(s_aligned) - diffs, "/",
@@ -152,6 +152,7 @@ def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conser
                                                     conserved_strength, bound, ignore_start_gaps, ignore_end_gaps)
     # show important information
     print_all_info(s_aligned, t_aligned, max_score, scoring_matrix)
+    return max_score, s_aligned, t_aligned
 
 
 if __name__ == '__main__':
