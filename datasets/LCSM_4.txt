@@ -1,0 +1,6 @@
+>Sample_1
+G
+>Sample_2
+T
+>Sample_3
+A
