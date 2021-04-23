@@ -1,4 +1,4 @@
-from SPLC import read_fasta
+from utils import read_fasta
 
 
 def main_EDTA(seqs):
@@ -53,5 +53,5 @@ def main_EDTA(seqs):
 
 
 if __name__ == '__main__':
-    seqs = read_fasta("../datasets/EDTA_1.txt")
+    seqs = read_fasta("../datasets/EDTA_3.txt")
     print(main_EDTA(seqs))
