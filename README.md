@@ -1,7 +1,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c6150e482d28425a8895843df1b2a640)](https://app.codacy.com/gh/ChengyuanSha/Smart-Alignment?utm_source=github.com&utm_medium=referral&utm_content=ChengyuanSha/Smart-Alignment&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/bff56bab2b5741ccade6610ce3e0df49)](https://www.codacy.com/gh/ChengyuanSha/Smart-Alignment/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ChengyuanSha/Smart-Alignment&amp;utm_campaign=Badge_Coverage)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Global Alignment with Scoring Matrix, Custom Weight, Affine Gap Penalty and Bounded Dynamic Programming (DP) Acceleration.
+## Global Alignment with Scoring Matrix, Custom Weight, Affine Gap Penalty and Bounded Dynamic Programming (DP) Acceleration
 
 ## Introduction
 
