@@ -9,8 +9,8 @@ class TestAlgo(unittest.TestCase):
         sample_answer = ['3', '4', '5']
         rel_path = "../datasets/SSEQ_1.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        input = read_fasta(abs_file_path)
-        result = main_SSEQ(input)
+        seq = read_fasta(abs_file_path)
+        result = main_SSEQ(seq)
         self.assertEqual(sample_answer, result)
 
     def test_SSEQ_2(self):
@@ -18,17 +18,17 @@ class TestAlgo(unittest.TestCase):
 
         rel_path = "../datasets/SSEQ_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        input = read_fasta(abs_file_path)
-        result = main_SSEQ(input)
+        seq = read_fasta(abs_file_path)
+        result = main_SSEQ(seq)
         self.assertEqual(sample_answer, result)
 
     def test_SSEQ_3(self):
         sample_answer = []
         rel_path = "../datasets/SSEQ_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        input = read_fasta(abs_file_path)
-        result = main_SSEQ(input)
+        seq = read_fasta(abs_file_path)
+        result = main_SSEQ(seq)
         self.assertEqual(sample_answer, result)
-        
+
 if __name__ == '__main__':
     unittest.main() # pragma: no cover
