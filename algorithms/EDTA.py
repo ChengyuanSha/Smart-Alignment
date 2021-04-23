@@ -1,57 +1,64 @@
 from utils import read_fasta
 
-
 def main_EDTA(seqs):
+    '''
+    Given: Two strings s and t in FASTA format.
+    Return: The edit distance dE(s,t) followed by two gapped strings s′ and t′ representing an optimal alignment.
+    '''
+
     s, t = seqs
+    len_one, len_two = len(s), len(t)
+    
+    # initialize distance matrix with zeroes
+    dist_mat = [[0] * (len_two + 1) for _ in range(len_one + 1)]
+    # fill distance matrix with values
+    for i in range(len_one + 1):
+        dist_mat[i][0] = i
+    for j in range(len_two + 1):
+        dist_mat[0][j] = j
+    for i in range(1, len_one + 1):
+        for j in range(1, len_two + 1):
+            left = dist_mat[i-1][j] + 1
+            up = dist_mat[i][j-1] + 1
+            diag = dist_mat[i-1][j-1]
+            if s[i-1] != t[j-1]:
+                diag += 1
+            dist_mat[i][j] = min(left, up, diag)
+    
+    # edit distance is bottom right value of distance matrix
+    dist = dist_mat[len_one][len_two]
 
-    # Initialize the distance and traceback matrices with zeros.
-    d = [[0 for j in range(len(t) + 1)] for i in range(len(s) + 1)]
-    traceback = [[0 for j in range(len(t) + 1)] for i in range(len(s) + 1)]
-
-    # Each cell in the first row and column recieves a gap penalty (-1).
-    for i in range(1, len(s) + 1):
-        d[i][0] = i
-    for j in range(1, len(t) + 1):
-        d[0][j] = j
-
-    # Fill in the distance and traceback matrices.
-    for i in range(1, len(s) + 1):
-        for j in range(1, len(t) + 1):
-            scores = [d[i - 1][j - 1] + (s[i - 1] != t[j - 1]),  # 0 = match
-                      d[i - 1][j] + 1,  # 1 = insertion
-                      d[i][j - 1] + 1]  # 2 = deletion
-            d[i][j] = min(scores)
-            traceback[i][j] = scores.index(d[i][j])
-
-    # The edit distance the last cell (bottom-right) of the distance matrix.
-    edit_dist = d[-1][-1]
-
-    # Initialize the aligned strings as the input strings.
-    s_align, t_align = s, t
-
-    # traceback to the edge of the matrix starting at the bottom right.
+    # initialize gapped strings
+    gapped_s, gapped_t = '', ''
     i, j = len(s), len(t)
-
-    while i > 0 and j > 0:
-        if traceback[i][j] == 1:
+    while (i>0 and j>0):
+        left = dist_mat[i][j-1]
+        up = dist_mat[i-1][j]
+        diag = dist_mat[i-1][j-1]
+        min_ = min(left, up, diag)
+        if dist_mat[i][j]==min_:
+            gapped_s = s[i-1]+gapped_s
+            gapped_t = t[j-1]+gapped_t
             i -= 1
-            t_align = t_align[:j] + '-' + t_align[j:]
-        elif traceback[i][j] == 2:
             j -= 1
-            s_align = s_align[:i] + '-' + s_align[i:]
         else:
-            i -= 1
-            j -= 1
+            if (min_==left and min_==up) or (min_!=left and min_!=up):
+                gapped_s = s[i-1]+gapped_s
+                gapped_t = t[j-1]+gapped_t
+                i -= 1
+                j -= 1
+            elif min_!=left and min_==up:
+                gapped_s = s[i-1]+gapped_s
+                gapped_t = "-"+gapped_t
+                i -= 1
+            elif min_==left and min_!=up:
+                gapped_s = "-"+gapped_s
+                gapped_t = t[j-1]+gapped_t
+                j -= 1
+    
+    return (dist, gapped_s, gapped_t)
 
-    # Prepend insertions/deletions if necessary.
-    for dash in range(i):
-        t_align = t_align[:0] + '-' + t_align[0:]
-    for dash in range(j):
-        s_align = s_align[:0] + '-' + s_align[0:]
-
-    return edit_dist, s_align, t_align
-
-
+    
 if __name__ == '__main__':
-    seqs = read_fasta("../datasets/EDTA_3.txt")
+    seqs = read_fasta("../datasets/EDTA_1.txt")
     print(main_EDTA(seqs))
