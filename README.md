@@ -3,43 +3,30 @@
 
 ## Global Alignment with Scoring Matrix, Custom Weight, Affine Gap Penalty and Bounded Dynamic Programming (DP) Acceleration.
 
-## Development Notes (will remove after finish)
+## Introduction
 
-* Every Rosalind node should have its own file in the format ```ACRN.py``` (Put inside algorithms folder) 
+* Every Rosalind node have its own file in the format ```ACRN.py``` (in algorithms folder) 
   where ```ACRN``` is the acronym for the node in the tree view
   
-* Name the main function in each node main_XXX, eg. main function in ```ACRN.py``` should be ```main_ACRN(...)```
+* The main function in each node is main_XXX, eg. main function in ```ACRN.py``` is```main_ACRN(...)```
  the main function input is what it says on the rosalind site.
-  
-* read_input is for reading files
 
-* Name testing function test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
+* Testing function is named test_function_name, eg. for ```ACRN.py``` -> ```test_ACRN.py```
 
-* Use following way to read input files. eg.
-```python
-import os
-script_dir = os.path.dirname(__file__) # absolute dir the script is in
-rel_path = "../datasets/DNA_1.txt"
-abs_file_path = os.path.join(script_dir, rel_path)
-```
+* There are multiple tests per function, first two are positive, last one is negative. 
+  Test data are named form 1-3 in dataset (except for extension, there are 6 dataset, first 3 are used by experiment).
 
-* multiple tests per function, first two positive, last one negative
-
-* unit test doc: https://docs.python.org/3/library/unittest.html
-
-* use of doc string: https://www.python.org/dev/peps/pep-0257/
-
-* Check coverage: https://coverage.readthedocs.io/en/coverage-5.5/
-
-```python
-coverage run -m unittest discover
-```
 ## Code quality
 
 Code quality and test coverage is ensured by the continuous integration server [Codacy](https://www.codacy.com/)
 and python [Coverage](https://coverage.readthedocs.io/en/coverage-5.5/).
 Codacy uses Radon by default to calculate metrics from the source code.
 
+We achieved 100% coverage on all algorithm files. Check Coverage:
+```python
+coverage run -m unittest discover
+coverage report
+```
 
 ## Running Instruction
 

@@ -2,7 +2,7 @@ from algorithms.utils import read_fasta
 
 
 def create_gap_from_distmat(matrix, s, t):
-    """ creates gapped strings based on distance matrix """
+    """Creates gapped strings based on distance matrix."""
 
     gapped_s, gapped_t = '', ''
     i, j = len(s), len(t)

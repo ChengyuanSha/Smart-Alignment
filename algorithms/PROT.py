@@ -18,7 +18,7 @@ def read_input(fname):
 
 
 def main_PROT(rna):
-    """Main PROT"""
+    """Main PROT."""
     mapping = codons()
     pep = ""
 
