@@ -23,7 +23,7 @@ Code quality and test coverage is ensured by the continuous integration server [
 and python [Coverage](https://coverage.readthedocs.io/en/coverage-5.5/).
 Codacy uses Radon by default to calculate metrics from the source code.
 
-We achieved 100% coverage on all algorithm files. Check Coverage:
+We achieved 100% coverage on all algorithm files. Check Coverage: Run the following commands in project root directory.
 ```python
 coverage run -m unittest discover
 coverage report
