@@ -40,7 +40,7 @@ optimal scores from unbounded algorithm).
 
 `experiments.py` contains all other experiments performed by us.
 
-## Function usage:
+## Function usage
 
 ```text
 GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
@@ -49,10 +49,13 @@ GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_st
     Global Alignment with Scoring Matrix, Custom Weight, Affine Gap Penalty and Bounded DP Acceleration.
 
     Inputs: Two protein strings s and t in FASTA format.
-            conserved_seq: will increase the weight on the sequence.
-            conserved_strength: weight on conserved_seq.
+            gap: a negative int representing gap opening penalty.
+            gap_ext: a negative int representing gap extension penalty.
+            conserved_seq: increase the weight on letters in the input sequence (string). Default empty string.
+            conserved_strength: weight on conserved_seq. Default 0.
             bound: Define the range of bound dynamic programming. Negative number will run unbound version.
-            auto_bound: Auto calculate the bound size using DNA length difference.
+                   Default -1.
+            auto_bound: Auto calculate the bound size using DNA length difference, default False.
             ignore_start_gaps: ignoring start gaps in alignment, default False.
             ignore_end_gaps: ignoring end gaps in alignment, default False.
 
@@ -60,7 +63,8 @@ GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_st
              s′ and t′ representing an optimal alignment of s and t.
 ```
 
-
+## More detailed explanation
+Our academic paper can be found in `paper.pdf`.
 
 
 
