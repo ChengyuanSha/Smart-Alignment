@@ -25,7 +25,7 @@ def main_EDTA(seqs):
             if s[i-1] != t[j-1]:
                 diag += 1
             dist_mat[i][j] = min(left, up, diag)
-            
+
     # edit distance is bottom right value of distance matrix
     dist = dist_mat[len_one][len_two]
 
@@ -39,7 +39,7 @@ def main_EDTA(seqs):
         up = dist_mat[i-1][j]
         diag = dist_mat[i-1][j-1]
         best = min(left, up, diag)
-        if dist_mat[i][j] == best: 
+        if dist_mat[i][j] == best:
             # match
             gapped_s = s[i-1] + gapped_s
             gapped_t = t[j-1] + gapped_t
