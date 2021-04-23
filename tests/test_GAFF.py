@@ -1,5 +1,4 @@
 from algorithms.GAFF import main_GAFF, read_fasta, BLOSUM62
-
 import unittest
 import os
 

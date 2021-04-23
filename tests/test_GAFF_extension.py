@@ -1,4 +1,4 @@
-from algorithms.GAFF_extension import read_fasta, BLOSUM62, GAFF_extended
+from algorithms.GAFF_extension import read_fasta, BLOSUM62, GAFF_extended, main_extension
 
 import unittest
 import os
@@ -14,20 +14,20 @@ class TestAlgo(unittest.TestCase):
         sample_answer3 = "PRTWPSEIN-"
         rel_path = '../datasets/extension_4.txt'
         abs_file_path = os.path.join(script_dir, rel_path)
-        s, t = read_fasta(abs_file_path)
-        max_score, s_aligned, t_aligned = GAFF_extended(s, t, BLOSUM62(), -11, -1)
+        max_score, s_aligned, t_aligned  = main_extension(abs_file_path, BLOSUM62(), -11, -1)
         self.assertEqual(sample_answer1, max_score)
         self.assertEqual(sample_answer2, s_aligned)
         self.assertEqual(sample_answer3, t_aligned)
 
     def test_DNA_2(self):
         sample_answer1 = 2
-        sample_answer2 = "ATCCG"
-        sample_answer3 = "A--CG"
+        sample_answer2 = "AAAAAMHASYPYASTAHYAAA----AAAA----"
+        sample_answer3 = "--------------TANYSTATDQM----HSTS"
         rel_path = '../datasets/extension_5.txt'
         abs_file_path = os.path.join(script_dir, rel_path)
-        s, t = read_fasta(abs_file_path)
-        max_score, s_aligned, t_aligned = GAFF_extended(s, t, BLOSUM62(), -11, -1)
+        max_score, s_aligned, t_aligned = main_extension(abs_file_path, BLOSUM62(), -11, -1, ignore_start_gaps=True,
+                       conserved_seq="A", conserved_strength=20,
+                       ignore_end_gaps=True, auto_bound=True)
         self.assertEqual(sample_answer1, max_score)
         self.assertEqual(sample_answer2, s_aligned)
         self.assertEqual(sample_answer3, t_aligned)
