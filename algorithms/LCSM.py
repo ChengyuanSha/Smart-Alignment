@@ -25,4 +25,3 @@ def main_LCSM(fname):
 
 if __name__ == '__main__':
     print(main_LCSM('../datasets/LCSM_5.txt'))  # pragma: no cover
-

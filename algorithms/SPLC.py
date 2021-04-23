@@ -1,27 +1,6 @@
 from algorithms.RNA import main_RNA
 from algorithms.PROT import main_PROT
-
-
-def read_input(fname):
-    '''Read txt file containing A DNA string.'''
-    with open(fname, 'r') as f:
-        return f.read()
-
-
-def read_fasta(fname):
-    '''Read in a Fasta file and returns a list of sequences.'''
-    temp = []
-    seqs = []
-
-    with open(fname, 'r') as f:
-        for line in f.readlines():
-            if line.startswith('>'):
-                temp.append(line[1:].strip())
-                seqs.append('')
-            else:
-                seqs[-1] += line.strip()
-
-    return seqs
+from algorithms.utils import read_fasta
 
 
 def main_SPLC(infile):
@@ -40,6 +19,6 @@ def main_SPLC(infile):
 
 
 if __name__ == "__main__":
-    infile = read_fasta("../datasets/SPLC_1.txt")
+    infile = read_fasta("../datasets/SPLC_1.txt")  # pragma: no cover
     # print(input)
-    print(main_SPLC(infile))
+    print(main_SPLC(infile))  # pragma: no cover

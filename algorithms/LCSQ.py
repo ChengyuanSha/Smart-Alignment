@@ -1,6 +1,7 @@
 import algorithms.utils as utils
 import numpy as np
 
+
 def fill_matrix(s, t):
     """
 
@@ -9,10 +10,10 @@ def fill_matrix(s, t):
     :param t:string2
     :return:Matrix where the score at each index M(i,j) is the length of the longest common subsequence at s(i) and t(j)
     """
-    M = np.zeros((len(s)+1, len(t)+1))
-    for i in range(1, len(s)+1):
-        for j in range(1, len(t)+1):
-            if s[i-1] == t[j-1]:
+    M = np.zeros((len(s) + 1, len(t) + 1))
+    for i in range(1, len(s) + 1):
+        for j in range(1, len(t) + 1):
+            if s[i - 1] == t[j - 1]:
                 M[i, j] = M[i - 1, j - 1] + 1
             else:
                 M[i, j] = max(M[i, j - 1], M[i - 1, j])
@@ -32,8 +33,8 @@ def trace(s, t, M, i, j):
     """
     if i == 0 or j == 0:
         return ''
-    elif s[i-1] == t[j-1]:
-        return trace(s, t, M, i - 1, j - 1) + s[i-1]
+    elif s[i - 1] == t[j - 1]:
+        return trace(s, t, M, i - 1, j - 1) + s[i - 1]
     elif M[i, j - 1] > M[i - 1, j]:
         return trace(s, t, M, i, j - 1)
     else:
@@ -54,6 +55,7 @@ def main_LCSQ(fname):
     M = fill_matrix(seqs[0], seqs[1])
     subsequence = trace(seqs[0], seqs[1], M, len(seqs[0]), len(seqs[1]))
     return subsequence
+
 
 if __name__ == '__main__':
     print(main_LCSQ('../datasets/LCSQ_1.txt'))  # pragma: no cover

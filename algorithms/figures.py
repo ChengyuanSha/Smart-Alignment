@@ -4,6 +4,7 @@ from algorithms.utils import BLOSUM62
 import time
 import numpy as np
 
+
 def generate_DNA_data(length):
     """Generate random DNA of variable length."""
     return ''.join(random.choice('ATCG') for _ in range(length))
@@ -21,7 +22,7 @@ def write_2dna_to_file(length, sec_len_divisor=1.0):
 def compare_efficiency():
     """Compare unmodified VS improved version."""
     time_ori, time_bound, x_range = [], [], []
-    for dna_len in range(10, 601, 10): # 10, 601, 10
+    for dna_len in range(10, 601, 10):  # 10, 601, 10
         write_2dna_to_file(dna_len)
         print("Unbounded Version: ")
         temp1 = []
@@ -47,7 +48,7 @@ def compare_efficiency():
 def comparing_optimal_scores(repeat, dna_len, auto_bound):
     """Compare unbound VS bound version in terms of optimal scores."""
     x_range, percentage = [], []
-    for divisor in np.linspace(1,3,21): # 1,3,21
+    for divisor in np.linspace(1, 3, 21):  # 1,3,21
         scores_ori, scores_bound = [], []
         for _ in range(repeat):
             write_2dna_to_file(dna_len, sec_len_divisor=divisor)
@@ -60,10 +61,9 @@ def comparing_optimal_scores(repeat, dna_len, auto_bound):
             scores_bound.append(max_score)
         x_range.append(divisor)
         common_scores = len([i for i, j in zip(scores_ori, scores_bound) if i == j])
-        percentage.append(round(common_scores/repeat*100, 4)) # %
+        percentage.append(round(common_scores / repeat * 100, 4))  # %
     # produce data for graph
     print(*list(zip(x_range, percentage)), sep='')
-
 
 
 if __name__ == '__main__':

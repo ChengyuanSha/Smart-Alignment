@@ -1,7 +1,8 @@
 """Common functions used by questions."""
 import pandas as pd
 import os
-script_dir = os.path.dirname(__file__) # absolute dir the script is in
+
+script_dir = os.path.dirname(__file__)  # absolute dir the script is in
 
 
 def read_fasta(fname):

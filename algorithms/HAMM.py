@@ -4,6 +4,7 @@ def read_input(fname):
         dna1, dna2 = f.read().split('\n')
     return dna1, dna2
 
+
 def HAMM(dna1, dna2):
     """Not bounded by DNA length version."""
     return sum(c1 != c2 for c1, c2 in zip(dna1, dna2))

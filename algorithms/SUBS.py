@@ -16,5 +16,5 @@ def main_SUBS(infile):
 
 
 if __name__ == "__main__":
-    infile = read_input("../datasets/SUBS_1.txt")
-    print(main_SUBS(infile))
+    infile = read_input("../datasets/SUBS_1.txt")  # pragma: no cover
+    print(main_SUBS(infile))  # pragma: no cover

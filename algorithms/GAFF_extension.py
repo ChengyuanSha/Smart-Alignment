@@ -63,7 +63,7 @@ def get_aligned_seq_ext(s, t, L, U, M, trace_L, trace_U, trace_M, ignore_end_gap
 
 
 def GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
-                  ignore_start_gaps=False, ignore_end_gaps=False, auto_bound = False):
+                  ignore_start_gaps=False, ignore_end_gaps=False, auto_bound=False):
     """
     Global Alignment with Scoring Matrix and Affine Gap Penalty Extension.
 
@@ -150,7 +150,7 @@ def print_all_info(s_aligned, t_aligned, max_score, scoring_matrix):
 
 
 def main_extension(fname, scoring_matrix, gap, gap_ext, conserved_seq="", conserved_strength=0, bound=-1,
-                   ignore_start_gaps=False, ignore_end_gaps=False, auto_bound = False):
+                   ignore_start_gaps=False, ignore_end_gaps=False, auto_bound=False):
     """Main function of modified GAFF algorithm."""
     s, t = read_fasta(fname)
     max_score, s_aligned, t_aligned = GAFF_extended(s, t, scoring_matrix, gap, gap_ext, conserved_seq,

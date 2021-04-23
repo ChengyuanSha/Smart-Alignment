@@ -23,7 +23,7 @@ class TestAlgo(unittest.TestCase):
 
     def test_EDTA_3(self):
         sample_answer = (35, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
-        rel_path = "../datasets/EDTA_2.txt"
+        rel_path = "../datasets/EDTA_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
         strings = read_fasta(abs_file_path)
         result = main_EDTA(strings)

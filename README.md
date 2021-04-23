@@ -36,7 +36,7 @@ coverage run -m unittest discover
 ```
 ## Code quality
 
-Code quality and test coverage is ensured by the online automatic tool [Codacy](https://www.codacy.com/)
+Code quality and test coverage is ensured by the continuous integration server [Codacy](https://www.codacy.com/)
 and python [Coverage](https://coverage.readthedocs.io/en/coverage-5.5/).
 Codacy uses Radon by default to calculate metrics from the source code.
 

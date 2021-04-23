@@ -22,5 +22,5 @@ def main_SSEQ(strings):
 
 
 if __name__ == "__main__":
-    strings = read_fasta("../datasets/SSEQ_2.txt")
-    print(main_SSEQ(strings))
+    strings = read_fasta("../datasets/SSEQ_2.txt")  # pragma: no cover
+    print(main_SSEQ(strings))  # pragma: no cover

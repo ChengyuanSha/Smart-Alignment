@@ -18,6 +18,7 @@ def read_input(fname):
 
 
 def main_PROT(rna):
+    """Main PROT"""
     mapping = codons()
     pep = ""
 
@@ -33,5 +34,5 @@ def main_PROT(rna):
 
 
 if __name__ == "__main__":
-    rna = read_input("../datasets/PROT_3.txt")
-    print(main_PROT(rna))
+    rna = read_input("../datasets/PROT_3.txt") # pragma: no cover
+    print(main_PROT(rna)) # pragma: no cover
