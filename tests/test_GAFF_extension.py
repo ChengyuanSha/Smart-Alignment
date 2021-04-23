@@ -37,7 +37,7 @@ class TestAlgo(unittest.TestCase):
         abs_file_path = os.path.join(script_dir, rel_path)
         with self.assertRaises(Exception) as context:
             s, t = read_fasta(abs_file_path)
-            GAFF_extended(s, t, BLOSUM62(), -11, -1)
+            GAFF_extended(s, t, BLOSUM62(), -11, -1)  # pragma: no cover
         self.assertTrue('Input Error' in str(context.exception))
 
 

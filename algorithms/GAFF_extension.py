@@ -130,9 +130,9 @@ def print_seq_in_colour(s, t, scoring_matrix):
         elif scoring_matrix.loc[s[i], t[i]] >= 0:  # good alignment
             new_s += (Fore.LIGHTGREEN_EX + s[i])
             new_t += (Fore.LIGHTGREEN_EX + t[i])
-        elif scoring_matrix.loc[s[i], t[i]] < 0:  # bad alignment
-            new_s += (Fore.LIGHTRED_EX + s[i])
-            new_t += (Fore.LIGHTRED_EX + t[i])
+        elif scoring_matrix.loc[s[i], t[i]] < 0:  # pragma: no cover bad alignment
+            new_s += (Fore.LIGHTRED_EX + s[i])  # pragma: no cover
+            new_t += (Fore.LIGHTRED_EX + t[i])  # pragma: no cover
     return new_s, new_t, num_of_gaps
 
 

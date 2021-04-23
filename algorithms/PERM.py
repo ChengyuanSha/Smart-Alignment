@@ -24,7 +24,7 @@ def permutations(numbers):
     :return:all permutations of list of integers 1 to n
     """
     if len(numbers) == 0:
-        return []
+        return []  # pragma: no cover
     if len(numbers) == 1:
         return [numbers]
     perm = []

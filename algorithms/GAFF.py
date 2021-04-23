@@ -7,7 +7,7 @@ def add_leading_gaps(t_aligned, s_aligned, i, j):
     for _ in range(i):
         t_aligned = t_aligned[:0] + '-' + t_aligned[0:]
     for _ in range(j):
-        s_aligned = s_aligned[:0] + '-' + s_aligned[0:]
+        s_aligned = s_aligned[:0] + '-' + s_aligned[0:]  # pragma: no cover
     return s_aligned, t_aligned
 
 
