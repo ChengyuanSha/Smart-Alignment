@@ -1,4 +1,44 @@
-from utils import read_fasta
+from algorithms.utils import read_fasta
+
+def create_gap_from_distmat(matrix, s, t):
+    
+    """ creates gapped strings based on distance matrix """
+
+    gapped_s, gapped_t = '', ''
+    i, j = len(s), len(t)
+
+    while (i > 0 and j > 0):
+        left = matrix[i][j-1]
+        up = matrix[i-1][j]
+        diag = matrix[i-1][j-1]
+        best = min(left, up, diag)
+        if matrix[i][j] == best:
+            # match
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = t[j-1] + gapped_t
+            i -= 1
+            j -= 1
+        elif (best == left and best == up) or (best != left and best != up):
+            # mismatch
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = t[j-1] + gapped_t
+            i -= 1
+            j -= 1
+        elif best != left and best == up:
+            # gap in second string
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = '-' + gapped_t
+            i -= 1
+        elif best == left and best != up:
+            #gap in first string
+            gapped_s = '-' + gapped_s
+            gapped_t = t[j-1] + gapped_t
+            j -= 1
+        else:
+            print('shouldnt get here')
+            return 0
+
+    return gapped_s, gapped_t
 
 def main_EDTA(seqs):
 
@@ -31,39 +71,9 @@ def main_EDTA(seqs):
 
     # initialize gapped strings
     gapped_s, gapped_t = '', ''
-    i, j = len(s), len(t)
-
-    # construct the strings based on match/gaps in distance matrix
-    while (i > 0 and j > 0):
-        left = dist_mat[i][j-1]
-        up = dist_mat[i-1][j]
-        diag = dist_mat[i-1][j-1]
-        best = min(left, up, diag)
-        if dist_mat[i][j] == best:
-            # match
-            gapped_s = s[i-1] + gapped_s
-            gapped_t = t[j-1] + gapped_t
-            i -= 1
-            j -= 1
-        elif (best == left and best == up) or (best != left and best != up):
-            # mismatch
-            gapped_s = s[i-1] + gapped_s
-            gapped_t = t[j-1] + gapped_t
-            i -= 1
-            j -= 1
-        elif best != left and best == up:
-            # gap in second string
-            gapped_s = s[i-1] + gapped_s
-            gapped_t = '-' + gapped_t
-            i -= 1
-        elif best == left and best != up:
-            #gap in first string
-            gapped_s = '-' + gapped_s
-            gapped_t = t[j-1] + gapped_t
-            j -= 1
-        else:
-            print('shouldnt get here')
-            return 0
+    i, j = len_one, len_two
+    
+    gapped_s, gapped_t = create_gap_from_distmat(dist_mat, s, t)
 
     return (dist, gapped_s, gapped_t)
 
