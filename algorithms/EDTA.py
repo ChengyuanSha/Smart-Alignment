@@ -1,6 +1,7 @@
 from utils import read_fasta
 
 def main_EDTA(seqs):
+
     '''
     Given: Two strings s and t in FASTA format.
     Return: The edit distance dE(s,t) followed by two gapped strings s′ and t′ representing an optimal alignment.
@@ -8,7 +9,7 @@ def main_EDTA(seqs):
 
     s, t = seqs
     len_one, len_two = len(s), len(t)
-    
+
     # initialize distance matrix with zeroes
     dist_mat = [[0] * (len_two + 1) for _ in range(len_one + 1)]
     # fill distance matrix with values
@@ -24,41 +25,48 @@ def main_EDTA(seqs):
             if s[i-1] != t[j-1]:
                 diag += 1
             dist_mat[i][j] = min(left, up, diag)
-    
+            
     # edit distance is bottom right value of distance matrix
     dist = dist_mat[len_one][len_two]
 
     # initialize gapped strings
     gapped_s, gapped_t = '', ''
     i, j = len(s), len(t)
-    while (i>0 and j>0):
+
+    # construct the strings based on match/gaps in distance matrix
+    while (i > 0 and j > 0):
         left = dist_mat[i][j-1]
         up = dist_mat[i-1][j]
         diag = dist_mat[i-1][j-1]
-        min_ = min(left, up, diag)
-        if dist_mat[i][j]==min_:
-            gapped_s = s[i-1]+gapped_s
-            gapped_t = t[j-1]+gapped_t
+        best = min(left, up, diag)
+        if dist_mat[i][j] == best: 
+            # match
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = t[j-1] + gapped_t
             i -= 1
             j -= 1
+        elif (best == left and best == up) or (best != left and best != up):
+            # mismatch
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = t[j-1] + gapped_t
+            i -= 1
+            j -= 1
+        elif best != left and best == up:
+            # gap in second string
+            gapped_s = s[i-1] + gapped_s
+            gapped_t = '-' + gapped_t
+            i -= 1
+        elif best == left and best != up:
+            #gap in first string
+            gapped_s = '-' + gapped_s
+            gapped_t = t[j-1] + gapped_t
+            j -= 1
         else:
-            if (min_==left and min_==up) or (min_!=left and min_!=up):
-                gapped_s = s[i-1]+gapped_s
-                gapped_t = t[j-1]+gapped_t
-                i -= 1
-                j -= 1
-            elif min_!=left and min_==up:
-                gapped_s = s[i-1]+gapped_s
-                gapped_t = "-"+gapped_t
-                i -= 1
-            elif min_==left and min_!=up:
-                gapped_s = "-"+gapped_s
-                gapped_t = t[j-1]+gapped_t
-                j -= 1
-    
+            print('shouldnt get here')
+            return 0
+
     return (dist, gapped_s, gapped_t)
 
-    
 if __name__ == '__main__':
     seqs = read_fasta("../datasets/EDTA_1.txt")
     print(main_EDTA(seqs))
