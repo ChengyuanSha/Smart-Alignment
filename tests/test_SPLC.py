@@ -9,24 +9,24 @@ class TestAlgo(unittest.TestCase):
         sample_answer = 'MVYIADKQHVASREAYGHMFKVCA'
         rel_path = "../datasets/SPLC_1.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        input = read_fasta(abs_file_path)
-        result = main_SPLC(input)
+        seq = read_fasta(abs_file_path)
+        result = main_SPLC(seq)
         self.assertEqual(sample_answer, result)
 
     def test_SPLC_2(self):
         sample_answer = 'FTGVFVTLTEL'
         rel_path = "../datasets/SPLC_2.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
-        input = read_fasta(abs_file_path)
-        result = main_SPLC(input)
+        seq = read_fasta(abs_file_path)
+        result = main_SPLC(seq)
         self.assertEqual(sample_answer, result)
-        
+
     def test_SPLC_3(self):
         rel_path = "../datasets/SPLC_3.txt"
         abs_file_path = os.path.join(script_dir, rel_path)
         with self.assertRaises(Exception) as context:
-            input = rread_fasta(abs_file_path)
-            main_SPLC(input)
+            seq = read_fasta(abs_file_path)
+            main_SPLC(seq)
         self.assertTrue('No exons detected.' in str(context.exception))
 
 if __name__ == '__main__':
